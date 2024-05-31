@@ -10,6 +10,10 @@
             <iq:product id="edge_1000"/>
             <iq:product id="edge_520"/>
             <iq:product id="edgeexplore"/>
+            <iq:product id="enduro"/>
+            <iq:product id="fenix6xpro"/>
+            <iq:product id="fenix7x"/>
+            <iq:product id="fenix7xpro"/>
         </iq:products>
         <iq:permissions>
             <iq:uses-permission id="Positioning"/>

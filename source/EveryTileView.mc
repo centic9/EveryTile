@@ -242,6 +242,29 @@ class EveryTileView extends Ui.DataField {
        return true;
     }
 
+    // devices with round display with 280x280 pixel
+    (:enduro :fenix6xpro :fenix7x :fenix7xpro)
+    function onLayout(dc)
+    {
+       dx=dc.getWidth();
+       dy=dc.getHeight();
+       mx = dx>>1;
+       my = dy>>1;
+       if (dx != 280 || dy != 280)
+       {
+          singleDF = false;
+       }else
+       {
+          singleDF = true;
+       }
+       tx=[ 40, 65,  115, 165, 215, 241];
+       ty=[40, 65, 115, 165, 215, 241];
+       tileW=50;
+       tileH=50;
+
+       return true;
+    }
+
     // The given info object contains all the current workout information.
     // Calculate a value and save it locally in this method.
     // Note that compute() and onUpdate() are asynchronous, and there is no
@@ -388,6 +411,26 @@ class EveryTileView extends Ui.DataField {
 
            dc.setClip(tx[0],ty[0],dx,dy-ty[0]);
         }
+    }
+
+    // header for devices with round display
+    // is split into two lines on top and bottom
+    (:headerR)
+    function header(dc)
+    {
+       dc.setClip(tx[0],0,dx,ty[0]);
+
+       dc.drawText(mx, ty[0]/4, Gfx.FONT_TINY,
+              "new: "+mp.newTiles.format("%i")+", tot: "+mp.newTilesR.format("%i"),
+              Gfx.TEXT_JUSTIFY_CENTER);
+
+       dc.setClip(tx[0],ty[0],dx,dy);
+
+       dc.drawText(mx, ty[5], Gfx.FONT_TINY,
+              "pos: ["+(mp.loni-mp.hloni).format("%i")+"/"+(mp.lati-mp.hlati).format("%i")+"]",
+              Gfx.TEXT_JUSTIFY_CENTER);
+
+       dc.setClip(tx[0],ty[0],dx,dy-ty[0]);
     }
 
     // Display the value you computed here. This will be called
